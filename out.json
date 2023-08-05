@@ -268,24 +268,32 @@
             "};",
             "",
             "struct LineContainer : std::multiset<Line, std::less<>> {",
-            "    // (for doubles, use inf = 1/.0, div(a,b) = a/b)",
-            "    static const ll inf = LLONG_MAX;",
+            "    // (for doubles, use INF = 1/.0, div(a,b) = a/b)",
+            "    static const ll INF = LLONG_MAX;",
             "",
-            "    ll div(ll a, ll b) { // floored division",
+            "    ll div(ll a, ll b) {",
+            "        // floored division",
             "        return a / b - ((a ^ b) < 0 && a % b);",
             "    }",
             "",
             "    bool isect(iterator x, iterator y) {",
-            "        if (y == end()) return x->p = inf, 0;",
-            "        if (x->m == y->m) x->p = x->b > y->b ? inf : -inf;",
-            "        else x->p = div(y->b - x->b, x->m - y->m);",
-            "        return x->p >= y->p;",
+            "        if (y == end()) {",
+            "            x->p = INF;",
+            "            return 0;",
+            "        }",
+            "        if (x->m == y->m)",
+            "            x->p = (x->b > y->b ? INF : -INF);",
+            "        else",
+            "            x->p = div(y->b - x->b, x->m - y->m);",
+            "        return (x->p >= y->p);",
             "    }",
             "",
             "    void add(ll m, ll b) {",
             "        auto z = insert({m, b, 0}), y = z++, x = y;",
-            "        while (isect(y, z)) z = erase(z);",
-            "        if (x != begin() && isect(--x, y)) isect(x, y = erase(y));",
+            "        while (isect(y, z))",
+            "            z = erase(z);",
+            "        if (x != begin() && isect(--x, y))",
+            "            isect(x, y = erase(y));",
             "        while ((y = x) != begin() && (--x)->p >= y->p)",
             "            isect(x, erase(y));",
             "    }",
@@ -298,7 +306,7 @@
             "};",
             "$0"
         ],
-        "description": "Container to add line sof the form m*x + b, and query maximum y-coordinates at given x."
+        "description": "Container to add lines of the form m*x + b, and query maximum y-coordinates at given x."
     },
     "CP-RMQ": {
         "prefix": "RMQ",
@@ -366,13 +374,13 @@
             "    }",
             "};"
         ],
-        "description": "Fenwick tree for range sums and point deltas."
+        "description": "Fenwick tree for range sums and point updates."
     },
     "CP-SEGTREE": {
         "prefix": "SEGTREE",
         "body": [
             "template <typename T>",
-            "T op(T a,T b) {",
+            "T op(T a, T b) {",
             "    return a + b; /* combine answers (any associative op) */",
             "}",
             "",
@@ -381,7 +389,7 @@
             "    return 0; /* initial value for queries (e.g. 0 for sum, -inf for max) */",
             "}",
             "",
-            "template <typename T, T(*op)(T,T), T(*e)()>",
+            "template <typename T, T(*op)(T, T), T(*e)()>",
             "struct SegTree {",
             "    // e.g. use SegTree<ll, op, e> tree(a);",
             "    int n;",
@@ -446,13 +454,13 @@
             "    }",
             "};"
         ],
-        "description": "Standard segment tree that supports range queries and point updates."
+        "description": "Standard segment tree that supports range queries and point setting."
     },
     "CP-ERASTOSTHENES": {
         "prefix": "ERASTOSTHENES",
         "body": [
             "constexpr int MAX_PR = 1e7;",
-            "bitset<MAX_PR> is_prime;",
+            "std::bitset<MAX_PR> is_prime;",
             "",
             "// REMEMBER TO RUN THIS FUNCTION!",
             "void compute_primes() {",
