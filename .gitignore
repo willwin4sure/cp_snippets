@@ -4,3 +4,5 @@ env
 maker/input.txt
 maker/output.txt
 snippet_desc.txt
+
+**/*.exe

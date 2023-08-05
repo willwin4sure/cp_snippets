@@ -1,7 +1,7 @@
 /*
     SEGTREE.cpp
 
-    Standard segment tree that supports range queries and point updates.
+    Standard segment tree that supports range queries and point setting.
 */
 
 #include <iostream>
@@ -41,7 +41,7 @@ using pii = std::pair<int, int>;
 
 ////////// SNIPPET BEGIN //////////
 template <typename T>
-T op(T a,T b) {
+T op(T a, T b) {
     return a + b; /* combine answers (any associative op) */
 }
 
@@ -50,7 +50,7 @@ T e() {
     return 0; /* initial value for queries (e.g. 0 for sum, -inf for max) */
 }
 
-template <typename T, T(*op)(T,T), T(*e)()>
+template <typename T, T(*op)(T, T), T(*e)()>
 struct SegTree {
     // e.g. use SegTree<ll, op, e> tree(a);
     int n;

@@ -1,7 +1,7 @@
 /*
     FENWICK.cpp
 
-    Fenwick tree for range sums and point deltas.
+    Fenwick tree for range sums and point updates.
 */
 
 #define $0 ;

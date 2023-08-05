@@ -60,7 +60,7 @@ public:
 
 ////////// SNIPPET BEGIN //////////
 constexpr int MAX_PR = 1e7;
-bitset<MAX_PR> is_prime;
+std::bitset<MAX_PR> is_prime;
 
 // REMEMBER TO RUN THIS FUNCTION!
 void compute_primes() {

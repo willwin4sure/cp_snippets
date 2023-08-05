@@ -1,5 +1,5 @@
 """
-    compiler.py
+    snippet_compiler.py
 
     Script that collects C++ snippets from ./cpp/* and
     compiles them to ./out.json in a format suitable
