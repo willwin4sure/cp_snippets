@@ -1,10 +1,8 @@
 /*
-    VECTORIO.cpp
+    VECTORIN.cpp
 
     Overloads istream operator for vector.
 */
-
-#define $0 ;
 
 #include <iostream>
 #include <cstdio>
@@ -49,7 +47,6 @@ std::istream& operator>>(std::istream& in, std::vector<T>& vec) {
     }
     return in;
 }
-$0
 ////////// SNIPPET END //////////
 
 int main() {

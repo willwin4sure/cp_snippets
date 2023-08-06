@@ -264,8 +264,7 @@
             "        in >> x;",
             "    }",
             "    return in;",
-            "}",
-            "$0"
+            "}"
         ],
         "description": "Overloads istream operator for vector."
     },

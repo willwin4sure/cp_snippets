@@ -1,5 +1,5 @@
 /*
-    PAIRIO.cpp
+    PAIRIN.cpp
 
     Overloads istream operator for pair.
 */
