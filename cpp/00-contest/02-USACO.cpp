@@ -5,6 +5,7 @@
 */
 
 #define $0 ;
+#define $1 ;
 
 ////////// SNIPPET BEGIN //////////
 #include <iostream>
@@ -41,6 +42,8 @@ using namespace __gnu_pbds;
 using ll = long long;
 using vi = std::vector<int>;
 using pii = std::pair<int, int>;
+
+$1
 
 int main() {
     std::ios::sync_with_stdio(false); std::cin.tie(nullptr);
