@@ -51,18 +51,10 @@ struct ModInt {
         *this += n; *this /= d;
     }
 
-    ModInt operator+(const ModInt& other) const noexcept {
-        return ModInt(*this) += other;
-    }
-    ModInt operator-(const ModInt& other) const noexcept {
-        return ModInt(*this) -= other;
-    }
-    ModInt operator*(const ModInt& other) const noexcept {
-        return ModInt(*this) *= other;
-    }
-    ModInt operator/(const ModInt& other) const noexcept {
-        return ModInt(*this) /= other;
-    }
+    ModInt operator+(const ModInt& other) const noexcept { return ModInt(*this) += other; }
+    ModInt operator-(const ModInt& other) const noexcept { return ModInt(*this) -= other; }
+    ModInt operator*(const ModInt& other) const noexcept { return ModInt(*this) *= other; }
+    ModInt operator/(const ModInt& other) const noexcept { return ModInt(*this) /= other; }
 
     ModInt& operator+=(const ModInt& other) noexcept {
         value += other.value;
@@ -95,9 +87,7 @@ struct ModInt {
         return pow(N - 2);
     }
 
-    explicit operator int() const {
-        return value;
-    }
+    explicit operator int() const { return value; }
     friend std::ostream& operator<<(std::ostream& os, const ModInt& obj) {
         return os << obj.value;
     }
