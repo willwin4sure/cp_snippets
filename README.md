@@ -8,12 +8,19 @@ Here is the current directory layout:
 
     .
     ├── cpp
-    │   ├── 00-contest          # Templates for contests, utilities like file I/O and timer
-    │   ├── 01-iteration        # e.g. Gosper's hack
-    │   ├── 02-datastructures   # e.g. indexed sets, line containers, segment trees
-    │   └── 03-numbertheory     # e.g. ModInt, primality
+    │   ├── 00-contest             # Contest templates and timer.
+    │   ├── 01-inputoutput         # File I/O and stream overloads.
+    │   ├── 02-datastructures      # e.g. indexed sets, line containers, segment trees
+    │   ├── 03-numbertheory        # e.g. ModInt, primality
+    │   ├── 04-combinatorics   
+    │   ├── 05-polynomial   
+    │   ├── 06-graph               # e.g. DSU, topsort, SCC, LCA, flows
+    │   ├── 07-geometry   
+    │   ├── 08-strings   
+    │   ├── 09-dynamicprogramming  
+    │   └── 10-bits                # e.g. Gosper's hack, custom bitset, subset iteration
     │
-    ├── snippet_compiler.py     # Compiles the snippets into json
+    ├── snippet_compiler.py        # Compiles the snippets into json
     ├── out.json
     ├── .gitignore
     ├── LICENSE

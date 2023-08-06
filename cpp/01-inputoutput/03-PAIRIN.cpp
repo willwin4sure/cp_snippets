@@ -1,7 +1,7 @@
 /*
-    INPUTARRAY.cpp
+    PAIRIO.cpp
 
-    Reads `n` integers from standard input into a vector named `a`.
+    Overloads istream operator for pair.
 */
 
 #define $0 ;
@@ -41,20 +41,18 @@ using ll = long long;
 using vi = std::vector<int>;
 using pii = std::pair<int, int>;
 
-
-int main() {
-    std::ios::sync_with_stdio(false); std::cin.tie(nullptr);
-
-    int n; cin >> n;
 ////////// SNIPPET BEGIN //////////
-std::vector<int> a(n);
-for (int i = 0; i < n; ++i) {
-    std::cin >> a[i];
+template <typename T, typename U>
+std::istream& operator>>(std::istream& in, std::pair<T, U>& pair) {
+    in >> pair.first >> pair.second;
+    return in;
 }
 $0
 ////////// SNIPPET END //////////
 
-    for (int i = 0; i < n; ++i) {
-        cout << a[i] << nl;
-    }
+int main() {
+    std::ios::sync_with_stdio(false); std::cin.tie(nullptr);
+
+    pii x; cin >> x;
+    cout << x.first << ' ' << x.second << nl;
 }

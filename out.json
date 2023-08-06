@@ -153,16 +153,6 @@
         ],
         "description": "C++ template for USACO problems. No `t` test cases, as in Codeforces."
     },
-    "CP-FILEIO": {
-        "prefix": "FILEIO",
-        "body": [
-            "std::freopen(\"$1.in\", \"r\", stdin);",
-            "std::freopen(\"$1.out\", \"w\", stdout);",
-            "",
-            "$0"
-        ],
-        "description": "Allows C++ file I/O by redirecting to standard input and output."
-    },
     "CP-TIMER": {
         "prefix": "TIMER",
         "body": [
@@ -187,33 +177,105 @@
         ],
         "description": "A C++ Timer class."
     },
-    "CP-INPUTARRAY": {
-        "prefix": "INPUTARRAY",
+    "CP-FILEIO": {
+        "prefix": "FILEIO",
         "body": [
-            "std::vector<int> a(n);",
-            "for (int i = 0; i < n; ++i) {",
-            "    std::cin >> a[i];",
+            "std::freopen(\"$1.in\", \"r\", stdin);",
+            "std::freopen(\"$1.out\", \"w\", stdout);",
+            "",
+            "$0"
+        ],
+        "description": "Allows C++ file I/O by redirecting to standard input and output."
+    },
+    "CP-DEBUG": {
+        "prefix": "DEBUG",
+        "body": [
+            "template <typename T>",
+            "std::ostream& operator<<(std::ostream& out, const std::vector<T>& vec) {",
+            "    if (vec.empty()) {",
+            "        out << \"[]\";",
+            "        return out;",
+            "    }",
+            "    out << \"[\" << vec[0];",
+            "    for (size_t i = 1; i < vec.size(); ++i) {",
+            "        out << \", \" << vec[i];",
+            "    }",
+            "    out << \"]\";",
+            "    return out;",
+            "}",
+            "",
+            "template <typename T, typename U>",
+            "std::ostream& operator<<(std::ostream& out, const std::pair<T, U>& pair) {",
+            "    return out << \"(\" << pair.first << \", \" << pair.second << \")\";",
+            "}",
+            "",
+            "template <typename T>",
+            "std::ostream& operator<<(std::ostream& out, const std::deque<T>& deq) {",
+            "    if (deq.empty()) {",
+            "        out << \"[]\";",
+            "        return out;",
+            "    }",
+            "    out << \"[\" << deq[0];",
+            "    for (size_t i = 1; i < deq.size(); ++i) {",
+            "        out << \", \" << deq[i];",
+            "    }",
+            "    out << \"]\";",
+            "}",
+            "",
+            "template <typename T>",
+            "std::ostream& operator<<(std::ostream& out, const std::unordered_set<T>& set) {",
+            "    out << '{';",
+            "    for (auto it = set.begin(); it != set.end(); it++) {",
+            "        T element = *it;",
+            "        out << element;",
+            "        if (std::next(it) != set.end()) {",
+            "            out << \", \";   ",
+            "        }",
+            "    }",
+            "    return out << '}';",
+            "}",
+            "",
+            "template <typename T, typename U>",
+            "std::ostream& operator<<(std::ostream& out, const std::map<T, U>& map) {",
+            "    out << '{';",
+            "    for (auto it = map.begin(); it != map.end(); it++) {",
+            "        std::pair<T1, T2> element = *it;",
+            "        out << element.first << \": \" << element.second;",
+            "        if (std::next(it) != map.end()) {",
+            "            out << \", \";   ",
+            "        }",
+            "    }",
+            "    return out << '}';",
             "}",
             "$0"
         ],
-        "description": "Reads `n` integers from standard input into a vector named `a`."
+        "description": "Overloads ostream operators for standard types."
     },
-    "CP-GOSPERHACK": {
-        "prefix": "GOSPERHACK",
+    "CP-VECTORIN": {
+        "prefix": "VECTORIN",
         "body": [
-            "// http://programmingforinsomniacs.blogspot.com/2018/03/gospers-hack-explained.html",
-            "int set = (1 << k) - 1;",
-            "int limit = (1 << n);",
-            "while (set < limit) {",
-            "    // use the subset",
-            "    $0",
-            "",
-            "    int c = set & -set;",
-            "    int r = set + c;",
-            "    set = (((r ^ set) >> 2) / c) | r;",
-            "}"
+            "template <typename T>",
+            "std::istream& operator>>(std::istream& in, std::vector<T>& vec) {",
+            "    for (T& x : vec) {",
+            "        in >> x;",
+            "    }",
+            "    return in;",
+            "}",
+            "$0"
         ],
-        "description": "Iterates through all subsets of size `k` from `n` elements using bitmasks in increasing order."
+        "description": "Overloads istream operator for vector."
+    },
+    "CP-PAIRIN": {
+        "prefix": "PAIRIN",
+        "body": [
+            "template <typename T, typename U>",
+            "std::istream& operator>>(std::istream& in, std::pair<T, U>& pair) {",
+            "    in >> pair.first >> pair.second;",
+            "    return in;",
+            "}",
+            "$0"
+        ],
+        "description": "Overloads istream operator for pair."
     },
     "CP-SAFEMAP": {
         "prefix": "SAFEMAP",
@@ -494,18 +556,10 @@
             "        *this += n; *this /= d;",
             "    }",
             "",
-            "    ModInt operator+(const ModInt& other) const noexcept {",
-            "        return ModInt(*this) += other;",
-            "    }",
-            "    ModInt operator-(const ModInt& other) const noexcept {",
-            "        return ModInt(*this) -= other;",
-            "    }",
-            "    ModInt operator*(const ModInt& other) const noexcept {",
-            "        return ModInt(*this) *= other;",
-            "    }",
-            "    ModInt operator/(const ModInt& other) const noexcept {",
-            "        return ModInt(*this) /= other;",
-            "    }",
+            "    ModInt operator+(const ModInt& other) const noexcept { return ModInt(*this) += other; }",
+            "    ModInt operator-(const ModInt& other) const noexcept { return ModInt(*this) -= other; }",
+            "    ModInt operator*(const ModInt& other) const noexcept { return ModInt(*this) *= other; }",
+            "    ModInt operator/(const ModInt& other) const noexcept { return ModInt(*this) /= other; }",
             "",
             "    ModInt& operator+=(const ModInt& other) noexcept {",
             "        value += other.value;",
@@ -538,9 +592,7 @@
             "        return pow(N - 2);",
             "    }",
             "",
-            "    explicit operator int() const {",
-            "        return value;",
-            "    }",
+            "    explicit operator int() const { return value; }",
             "    friend std::ostream& operator<<(std::ostream& os, const ModInt& obj) {",
             "        return os << obj.value;",
             "    }",
@@ -608,5 +660,22 @@
             "};"
         ],
         "description": "Disjoint set union with path compression and union by size."
+    },
+    "CP-GOSPERHACK": {
+        "prefix": "GOSPERHACK",
+        "body": [
+            "// http://programmingforinsomniacs.blogspot.com/2018/03/gospers-hack-explained.html",
+            "int set = (1 << k) - 1;",
+            "int limit = (1 << n);",
+            "while (set < limit) {",
+            "    // use the subset",
+            "    $0",
+            "",
+            "    int c = set & -set;",
+            "    int r = set + c;",
+            "    set = (((r ^ set) >> 2) / c) | r;",
+            "}"
+        ],
+        "description": "Iterates through all subsets of size `k` from `n` elements using bitmasks in increasing order."
     }
 }
