@@ -91,7 +91,7 @@ template <typename T, typename U>
 std::ostream& operator<<(std::ostream& out, const std::map<T, U>& map) {
     out << '{';
     for (auto it = map.begin(); it != map.end(); it++) {
-        std::pair<T1, T2> element = *it;
+        std::pair<T, U> element = *it;
         out << element.first << ": " << element.second;
         if (std::next(it) != map.end()) {
             out << ", ";   
