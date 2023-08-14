@@ -42,6 +42,11 @@ using vi = std::vector<int>;
 using pii = std::pair<int, int>;
 
 ////////// SNIPPET BEGIN //////////
+template <typename T, typename U>
+std::ostream& operator<<(std::ostream& out, const std::pair<T, U>& pair) {
+    return out << "(" << pair.first << ", " << pair.second << ")";
+}
+
 template <typename T>
 std::ostream& operator<<(std::ostream& out, const std::vector<T>& vec) {
     if (vec.empty()) {
@@ -54,11 +59,6 @@ std::ostream& operator<<(std::ostream& out, const std::vector<T>& vec) {
     }
     out << "]";
     return out;
-}
-
-template <typename T, typename U>
-std::ostream& operator<<(std::ostream& out, const std::pair<T, U>& pair) {
-    return out << "(" << pair.first << ", " << pair.second << ")";
 }
 
 template <typename T>
