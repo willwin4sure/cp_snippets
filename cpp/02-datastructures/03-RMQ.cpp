@@ -6,28 +6,7 @@
 
 #define $0 ;
 
-#include <iostream>
-#include <cstdio>
-#include <cassert>
-#include <chrono>
-#include <random>
-#include <cstdint>
-#include <string>
-#include <array>
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
-#include <deque>
-#include <numeric>
-#include <utility>
-#include <algorithm>
-#include <bitset>
-#include <cmath>
+#include <bits/stdc++.h>
 
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
@@ -41,10 +20,27 @@ using ll = long long;
 using vi = std::vector<int>;
 using pii = std::pair<int, int>;
 
+template <typename T, typename U>
+std::istream& operator>>(std::istream& in, std::pair<T, U>& pair) {
+    in >> pair.first >> pair.second;
+    return in;
+}
+
+template <typename T>
+std::istream& operator>>(std::istream& in, std::vector<T>& vec) {
+    for (T& x : vec) {
+        in >> x;
+    }
+    return in;
+}
+
 ////////// SNIPPET BEGIN //////////
+/**
+ * One-dimensional range minimum queries using a sparse table.
+*/
 template <typename T>
 struct RMQ {
-    // jmp[lvl][j] stores the minimum value and index (ties broken leftwards) in [j, j + 2^lvl)
+    /// jmp[lvl][j] stores the minimum value and index (ties broken leftwards) in [j, j + 2^lvl).
     std::vector<std::vector<std::pair<T, int>>> jmp;
     
     RMQ(const std::vector<T>& V) : jmp(1, std::vector<std::pair<T, int>>(V.size())) {
@@ -57,6 +53,7 @@ struct RMQ {
         }
     }
 
+    /// Queries are inclusive over [l, r].
     std::pair<T, int> query(int l, int r) {
         assert (l <= r);
         int lvl = 31 - __builtin_clz(r - l + 1);
@@ -73,4 +70,5 @@ int main() {
     RMQ<ll> rmq(v);
     assert(rmq.query(0, 3) == std::make_pair(1LL, 1) && rmq.query(4, 4) == std::make_pair(5LL, 4) && rmq.query(5, 6) == std::make_pair(2LL, 6));
     assert(rmq.query(0, 0) == std::make_pair(3LL, 0) && rmq.query(1, 3) == std::make_pair(1LL, 1));
+    std::cout << "ALL TESTS PASSED\n";
 }

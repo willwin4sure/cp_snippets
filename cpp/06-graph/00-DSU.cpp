@@ -6,28 +6,7 @@
 
 #define $0 ;
 
-#include <iostream>
-#include <cstdio>
-#include <cassert>
-#include <chrono>
-#include <random>
-#include <cstdint>
-#include <string>
-#include <array>
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
-#include <deque>
-#include <numeric>
-#include <utility>
-#include <algorithm>
-#include <bitset>
-#include <cmath>
+#include <bits/stdc++.h>
 
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
@@ -41,12 +20,25 @@ using ll = long long;
 using vi = std::vector<int>;
 using pii = std::pair<int, int>;
 
-////////// SNIPPET BEGIN //////////
-class DSU {
-private:
-    std::vector<int> m_parent;
-    std::vector<int> m_size;
+template <typename T, typename U>
+std::istream& operator>>(std::istream& in, std::pair<T, U>& pair) {
+    in >> pair.first >> pair.second;
+    return in;
+}
 
+template <typename T>
+std::istream& operator>>(std::istream& in, std::vector<T>& vec) {
+    for (T& x : vec) {
+        in >> x;
+    }
+    return in;
+}
+
+////////// SNIPPET BEGIN //////////
+/**
+ * Disjoint set union with path compression and union by size.
+*/
+class DSU {
 public:
     DSU(int n) {
         m_parent.resize(n);
@@ -57,6 +49,7 @@ public:
         }
     }
 
+    /// Returns the root of the set containing x.
     int find(int x) {
         if (m_parent[x] != x) {
             // Path compression
@@ -65,6 +58,7 @@ public:
         return m_parent[x];
     }
 
+    /// Unites the sets containing x and y.
     bool unite(int x, int y) {
         int root_x = find(x);
         int root_y = find(y);
@@ -82,13 +76,19 @@ public:
         return true;
     }
 
+    /// Returns true if x and y are in the same set.
     bool sameSet(int x, int y) {
         return find(x) == find(y);
     }
 
+    /// Returns the size of the set containing x.
     int getSize(int x) {
         return m_size[find(x)];
     }
+
+private:
+    std::vector<int> m_parent;
+    std::vector<int> m_size;
 };
 ////////// SNIPPET END //////////
 

@@ -6,28 +6,7 @@
 
 #define $0 ;
 
-#include <iostream>
-#include <cstdio>
-#include <cassert>
-#include <chrono>
-#include <random>
-#include <cstdint>
-#include <string>
-#include <array>
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
-#include <deque>
-#include <numeric>
-#include <utility>
-#include <algorithm>
-#include <bitset>
-#include <cmath>
+#include <bits/stdc++.h>
 
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
@@ -40,6 +19,20 @@ using namespace __gnu_pbds;
 using ll = long long;
 using vi = std::vector<int>;
 using pii = std::pair<int, int>;
+
+template <typename T, typename U>
+std::istream& operator>>(std::istream& in, std::pair<T, U>& pair) {
+    in >> pair.first >> pair.second;
+    return in;
+}
+
+template <typename T>
+std::istream& operator>>(std::istream& in, std::vector<T>& vec) {
+    for (T& x : vec) {
+        in >> x;
+    }
+    return in;
+}
 
 ////////// SNIPPET BEGIN //////////
 // operations: insert, erase (takes a pointer), find, find_by_order (returns a pointer), order_of_key
@@ -64,4 +57,5 @@ int main() {
     indexed_map<int, int> m;
     m[10] = 2;
     assert(m.lower_bound(9)->first == 10 && m.lower_bound(9)->second == 2);
+    std::cout << "ALL TESTS PASSED\n";
 }

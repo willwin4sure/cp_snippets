@@ -6,28 +6,7 @@
 
 #define $0 ;
 
-#include <iostream>
-#include <cstdio>
-#include <cassert>
-#include <chrono>
-#include <random>
-#include <cstdint>
-#include <string>
-#include <array>
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
-#include <deque>
-#include <numeric>
-#include <utility>
-#include <algorithm>
-#include <bitset>
-#include <cmath>
+#include <bits/stdc++.h>
 
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
@@ -41,27 +20,45 @@ using ll = long long;
 using vi = std::vector<int>;
 using pii = std::pair<int, int>;
 
+template <typename T, typename U>
+std::istream& operator>>(std::istream& in, std::pair<T, U>& pair) {
+    in >> pair.first >> pair.second;
+    return in;
+}
+
+template <typename T>
+std::istream& operator>>(std::istream& in, std::vector<T>& vec) {
+    for (T& x : vec) {
+        in >> x;
+    }
+    return in;
+}
+
 ////////// SNIPPET BEGIN //////////
 // https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/LineContainer.h
+
 struct Line {
     mutable ll m, b, p;
     bool operator<(const Line& o) const { return m < o.m; }
     bool operator<(ll x) const { return p < x; }
 };
 
+/**
+ * Container to add lines of the form m*x + b, and query maximum y-coordinates at given x.
+*/
 struct LineContainer : std::multiset<Line, std::less<>> {
-    // (for doubles, use INF = 1/.0, div(a,b) = a/b)
+    /// For doubles, use INF = 1/.0, div(a,b) = a/b.
     static const ll INF = LLONG_MAX;
 
+    /// Floored division.
     ll div(ll a, ll b) {
-        // floored division
         return a / b - ((a ^ b) < 0 && a % b);
     }
 
     bool isect(iterator x, iterator y) {
         if (y == end()) {
             x->p = INF;
-            return 0;
+            return false;
         }
         if (x->m == y->m)
             x->p = (x->b > y->b ? INF : -INF);
@@ -70,6 +67,7 @@ struct LineContainer : std::multiset<Line, std::less<>> {
         return (x->p >= y->p);
     }
 
+    /// Add line m*x + b.
     void add(ll m, ll b) {
         auto z = insert({m, b, 0}), y = z++, x = y;
         while (isect(y, z))
@@ -80,6 +78,7 @@ struct LineContainer : std::multiset<Line, std::less<>> {
             isect(x, erase(y));
     }
 
+    /// Query maximum y-coordinate at given x.
     ll query(ll x) {
         assert(!empty());
         auto l = *lower_bound(x);
@@ -97,4 +96,5 @@ int main() {
     assert(lc.query(0) == -5 && lc.query(-10) == -6 && lc.query(10) == 5);
     lc.add(-1, -2); lc.add(-3, -15); lc.add(-3, -12);
     assert(lc.query(0) == -2 && lc.query(-6) == 6 && lc.query(-2) == 0 && lc.query(12) == 7);
+    std::cout << "ALL TESTS PASSED\n";
 }

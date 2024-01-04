@@ -6,28 +6,7 @@
 
 #define $0 ;
 
-#include <iostream>
-#include <cstdio>
-#include <cassert>
-#include <chrono>
-#include <random>
-#include <cstdint>
-#include <string>
-#include <array>
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <stack>
-#include <deque>
-#include <numeric>
-#include <utility>
-#include <algorithm>
-#include <bitset>
-#include <cmath>
+#include <bits/stdc++.h>
 
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
@@ -41,9 +20,25 @@ using ll = long long;
 using vi = std::vector<int>;
 using pii = std::pair<int, int>;
 
+template <typename T, typename U>
+std::istream& operator>>(std::istream& in, std::pair<T, U>& pair) {
+    in >> pair.first >> pair.second;
+    return in;
+}
+
+template <typename T>
+std::istream& operator>>(std::istream& in, std::vector<T>& vec) {
+    for (T& x : vec) {
+        in >> x;
+    }
+    return in;
+}
+
 ////////// SNIPPET BEGIN //////////
+/**
+ * Fenwick tree for range sums and point updates. 1-indexed internally.
+*/
 struct Fenwick {
-    // 1-indexed internally
     int n;
     std::vector<ll> bit;
 
@@ -57,7 +52,7 @@ struct Fenwick {
             update(i, a[i]);
     }
 
-    // query operations are inclusive
+    /// Returns the sum of the range [0, idx].
     ll prefix(int idx) {
         ll ret = 0LL;
         for (++idx; idx > 0; idx -= idx & -idx)
@@ -65,12 +60,14 @@ struct Fenwick {
         return ret;
     }
 
+    /// Returns the sum of the range [l, r].
     ll sum(int l, int r) {
         if (l > r) return 0LL;
         if (l == 0) return prefix(r);
         return prefix(r) - prefix(l - 1);
     }
 
+    /// Adds `delta` to the value at index `idx`.
     void update(int idx, ll delta) {
         for (++idx; idx < n; idx += idx & -idx)
             bit[idx] += delta;
@@ -91,4 +88,5 @@ int main() {
     assert(f.sum(2, 4) == 1029 && f.sum(1, 2) == 1005);
     f.update(0, 1);
     assert(f.prefix(0) == 1);
+    std::cout << "ALL TESTS PASSED\n";
 }
